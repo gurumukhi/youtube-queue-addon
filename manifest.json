@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "YouTube Queue",
   "description": "Enable YouTube Queue - To enable PlayNext button on suggested videos",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "icons": {
     "96": "icons/icon.png"
   },
@@ -13,6 +13,9 @@
       ],
       "js": [
         "content_script.js"
+      ],
+      "css": [
+        "style.css"
       ]
     }
   ],
@@ -21,5 +24,9 @@
   },
   "permissions": [
     "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/playnexticon.png",
+    "icons/playnexticon-dark-theme.png"
   ]
 }
