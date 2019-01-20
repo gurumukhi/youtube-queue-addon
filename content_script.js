@@ -2,9 +2,11 @@ var loggingEnabled = false;
 var initCalled = false;
 
 var i = document.createElement('input');
+var isDarkThemeEnabled = document.querySelector('html').getAttribute('dark') == 'true';
 i.type = "image";
 i.id = 'playNext';
 i.classList.add('playNextAddonBtn');
+i.classList.add(isDarkThemeEnabled ? 'blackThemeBtn': 'whiteThemeBtn');
 i.title = "Play this video next";
 
 addButtonsIfRequired = function () {
