@@ -10,6 +10,26 @@ i.classList.add(isDarkThemeEnabled ? 'blackThemeBtn': 'whiteThemeBtn');
 i.title = "Play this video next";
 
 addButtonsIfRequired = function () {
+  /// remove if incorrect button is set as active
+  // console.log('checking............');
+  currentActive = document.querySelector('.playNextAddonBtnActive');
+  if (currentActive) {
+    nextURLSetTo=$0.closest('ytd-compact-video-renderer').querySelector('a').href;
+    logger(nextURLSetTo);
+    var storageItem = browser.storage.local.get();
+    storageItem.then((value) => {
+      storageURL = value.youtubePlayNextURL;
+      if (storageURL) {
+        logger(storageURL);
+      }
+      if (storageURL !== nextURLSetTo) {
+        currentActive.classList.remove('playNextAddonBtnActive');
+        currentActive.title = "Play this video next";
+        setPlayNextURL(null);
+      }
+    });
+  }
+
   var isDarkThemeEnabled = document.querySelector('html').getAttribute('dark') == 'true';
   logger('isDarkThemeEnabled? - ' + isDarkThemeEnabled);
 
@@ -61,15 +81,14 @@ clickAction = (e) => {
   setPlayNextURL(e.target.closest('ytd-compact-video-renderer').querySelector('a').href);
   currentActive = document.querySelector('.playNextAddonBtnActive');
   var alreadyChecked = e.target.classList.contains('playNextAddonBtnActive');
-  console.log(alreadyChecked);
   if (currentActive) {
-	currentActive.classList.remove('playNextAddonBtnActive');
-	currentActive.title = "Play this video next";
+    currentActive.classList.remove('playNextAddonBtnActive');
+    currentActive.title = "Play this video next";
   }
   if (alreadyChecked) { // deselcts the video, if it was checked before 
-	console.log("deselect this");
-	setPlayNextURL(null);
-	return;
+    logger("deselecting already selected");
+    setPlayNextURL(null);
+	  return;
   }
   e.target.classList.add('playNextAddonBtnActive');
   e.target.title = "This video is added to queue to be played next.";
@@ -134,3 +153,5 @@ init = function () {
 };
 
 setTimeout(init, 5000);
+
+// console.log('ok?............');
