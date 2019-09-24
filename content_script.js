@@ -14,7 +14,7 @@ addButtonsIfRequired = function () {
   logger('isDarkThemeEnabled? - ' + isDarkThemeEnabled);
 
   for (j=0; j < document.querySelectorAll('ytd-compact-video-renderer').length; j++) {
-    if (!document.querySelectorAll('ytd-compact-video-renderer')[j].querySelector('#'+'playNext'+j)) {
+    if (!document.querySelectorAll('ytd-compact-video-renderer')[j].querySelector('.playNextAddonBtn')) {
       ii = i.cloneNode();
       ii.id += j;
       if (isDarkThemeEnabled) {
@@ -29,9 +29,9 @@ addButtonsIfRequired = function () {
   }
 
   allBtns = document.querySelectorAll('input.playNextAddonBtn');
-  console.log('CHECKING image color issue');
+  logger('Checking image color issue');
   if (allBtns[0].src == browser.extension.getURL("icons/playnexticon.png") && isDarkThemeEnabled) {
-    console.log('found white theme image in dark theme, fixing this');
+    logger('Found white theme image in dark theme, fixing this');
     // found white theme image in dark theme, fix this
     allBtns.forEach(btn => {
       btn.src = browser.extension.getURL("icons/playnexticon-dark-theme.png");
@@ -40,7 +40,7 @@ addButtonsIfRequired = function () {
     });
   }
   else if (allBtns[0].src == browser.extension.getURL("icons/playnexticon-dark-theme.png") && !isDarkThemeEnabled) {
-    console.log('found dark theme image in white theme, fixing this');
+    logger('Found dark theme image in white theme, fixing this');
     // found dark theme image in white theme, fix this
     allBtns.forEach(btn => {
       btn.src = browser.extension.getURL("icons/playnexticon.png");
