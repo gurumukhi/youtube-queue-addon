@@ -60,9 +60,16 @@ addButtonOnYoutubePlayer = function () {
 clickAction = (e) => {
   setPlayNextURL(e.target.closest('ytd-compact-video-renderer').querySelector('a').href);
   currentActive = document.querySelector('.playNextAddonBtnActive');
+  var alreadyChecked = e.target.classList.contains('playNextAddonBtnActive');
+  console.log(alreadyChecked);
   if (currentActive) {
-    currentActive.classList.remove('playNextAddonBtnActive');
-    currentActive.title = "Play this video next";
+	currentActive.classList.remove('playNextAddonBtnActive');
+	currentActive.title = "Play this video next";
+  }
+  if (alreadyChecked) { // deselcts the video, if it was checked before 
+	console.log("deselect this");
+	setPlayNextURL(null);
+	return;
   }
   e.target.classList.add('playNextAddonBtnActive');
   e.target.title = "This video is added to queue to be played next.";
