@@ -2,29 +2,21 @@
   "manifest_version": 2,
   "name": "YouTube Queue",
   "description": "Enable YouTube Queue - To enable PlayNext button on suggested videos",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "icons": {
     "96": "icons/icon.png"
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://*.youtube.com/*"
-      ],
-      "js": [
-        "content_script.js"
-      ],
-      "css": [
-        "style.css"
-      ]
+      "matches": ["*://*.youtube.com/*", "*://*.khanacademy.org/*"],
+      "js": ["content_script.js"],
+      "css": ["style.css"]
     }
   ],
   "options_ui": {
     "page": "options/index.html"
   },
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "web_accessible_resources": [
     "icons/playnexticon.png",
     "icons/playnexticon-dark-theme.png"
